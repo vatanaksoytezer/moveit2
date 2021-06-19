@@ -199,7 +199,7 @@ if(BUILD_TESTING)
   )
   target_link_libraries(unit_test_servo_calcs ${SERVO_LIB_NAME})
   ament_target_dependencies(unit_test_servo_calcs ${THIS_PACKAGE_INCLUDE_DEPENDS} Boost)
-  add_ros_test(test/launch/unit_test_servo_calcs.test.py TIMEOUT 120 ARGS "test_binary_dir:=${CMAKE_CURRENT_BINARY_DIR}")
+  add_ros_test(test/launch/unit_test_servo_calcs.test.py ARGS "test_binary_dir:=${CMAKE_CURRENT_BINARY_DIR}")
 
   # Servo integration launch test
   ament_add_gtest_executable(test_servo_integration
