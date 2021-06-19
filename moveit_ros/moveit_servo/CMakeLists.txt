@@ -208,7 +208,7 @@ if(BUILD_TESTING)
   )
   target_link_libraries(test_servo_integration ${SERVO_PARAM_LIB_NAME})
   ament_target_dependencies(test_servo_integration ${THIS_PACKAGE_INCLUDE_DEPENDS})
-  add_ros_test(test/launch/test_servo_integration.test.py ARGS TIMEOUT 120 "test_binary_dir:=${CMAKE_CURRENT_BINARY_DIR}")
+  add_ros_test(test/launch/test_servo_integration.test.py TIMEOUT 120 ARGS "test_binary_dir:=${CMAKE_CURRENT_BINARY_DIR}")
 
   # Servo collision checking integration test
   ament_add_gtest_executable(test_servo_collision
