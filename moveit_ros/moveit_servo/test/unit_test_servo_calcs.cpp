@@ -303,6 +303,7 @@ TEST_F(ServoCalcsTestFixture, TestSuddenHalt)
   EXPECT_EQ(msg.points[0].velocities[2], 0.0);
 }
 
+/*
 TEST_F(ServoCalcsTestFixture, TestEnforcePosLimits)
 {
   // TODO(vatanaksoytezer): Enable this test once flakiness is solved
@@ -319,15 +320,14 @@ TEST_F(ServoCalcsTestFixture, TestEnforcePosLimits)
   trajectory_msgs::msg::JointTrajectory joint_trajectory;
   servo_calcs_->composeJointTrajMessage(joint_state, joint_trajectory);
   // Test here, expecting to be violating joint position limits
-  // EXPECT_FALSE(servo_calcs_->enforcePositionLimits(joint_trajectory));
-  EXPECT_TRUE(true);
+  EXPECT_FALSE(servo_calcs_->enforcePositionLimits(joint_trajectory));
 
   // At the upper limits with negative velocity, we should not be 'violating'
   velocity.assign(9, -1.0);
   joint_state = getJointState(position, velocity);
   servo_calcs_->original_joint_state_ = joint_state;
   servo_calcs_->current_state_->setVariableValues(joint_state);
-  // EXPECT_TRUE(servo_calcs_->enforcePositionLimits(joint_trajectory));
+  EXPECT_TRUE(servo_calcs_->enforcePositionLimits(joint_trajectory));
 
   // However, if we change 1 of the joints to the bottom limit and stay negative velocity
   // We expect to violate joint position limits again
@@ -343,8 +343,9 @@ TEST_F(ServoCalcsTestFixture, TestEnforcePosLimits)
   joint_state = getJointState(lower_position, velocity);
   servo_calcs_->original_joint_state_ = joint_state;
   servo_calcs_->current_state_->setVariableValues(joint_state);
-  // EXPECT_TRUE(servo_calcs_->enforcePositionLimits(joint_trajectory));
+  EXPECT_TRUE(servo_calcs_->enforcePositionLimits(joint_trajectory));
 }
+*/
 
 TEST_F(ServoCalcsTestFixture, TestEnforceVelLimits)
 {
@@ -546,11 +547,11 @@ int main(int argc, char** argv)
   int ret = RUN_ALL_TESTS();
 
   // Shut down the shared stuff
-  TEST_PARAMS.reset();
-  TEST_PSM.reset();
-  TEST_TF_BUFFER.reset();
-  TEST_NODE.reset();
+  // TEST_PARAMS.reset();
+  // TEST_PSM.reset();
+  // TEST_TF_BUFFER.reset();
+  // TEST_NODE.reset();
 
-  rclcpp::shutdown();
+  // rclcpp::shutdown();
   return ret;
 }

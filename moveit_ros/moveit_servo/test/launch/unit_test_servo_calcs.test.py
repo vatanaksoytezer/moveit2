@@ -38,9 +38,13 @@ def generate_test_description():
     )
 
 
+class TestGTestWaitForCompletion(unittest.TestCase):
+    # Waits for test to complete, then waits a bit to make sure result files are generated
+    def test_gtest_run_complete(self, servo_gtest):
+        self.proc_info.assertWaitForShutdown(servo_gtest, timeout=10.0)
+
+
 @launch_testing.post_shutdown_test()
 class TestGTestProcessPostShutdown(unittest.TestCase):
     def test_gtest_pass(self, proc_info, servo_gtest):
-        # TODO: Fix this
-        pass
-        # launch_testing.asserts.assertExitCodes(proc_info, process=servo_gtest)
+        launch_testing.asserts.assertExitCodes(proc_info, process=servo_gtest)
