@@ -193,13 +193,13 @@ if(BUILD_TESTING)
   # The issue is that the test completes successfully but a results file is not generated.
 
   # Unit test for ServoCalcs
-  # ament_add_gtest_executable(
-  #   unit_test_servo_calcs
-  #   test/unit_test_servo_calcs.cpp
-  # )
-  # target_link_libraries(unit_test_servo_calcs ${SERVO_LIB_NAME})
-  # ament_target_dependencies(unit_test_servo_calcs ${THIS_PACKAGE_INCLUDE_DEPENDS} Boost)
-  # add_ros_test(test/launch/unit_test_servo_calcs.test.py ARGS "test_binary_dir:=${CMAKE_CURRENT_BINARY_DIR}")
+  ament_add_gtest_executable(
+    unit_test_servo_calcs
+    test/unit_test_servo_calcs.cpp
+  )
+  target_link_libraries(unit_test_servo_calcs ${SERVO_LIB_NAME})
+  ament_target_dependencies(unit_test_servo_calcs ${THIS_PACKAGE_INCLUDE_DEPENDS} Boost)
+  add_ros_test(test/launch/unit_test_servo_calcs.test.py TIMEOUT 120 ARGS "test_binary_dir:=${CMAKE_CURRENT_BINARY_DIR}")
 
   # Servo integration launch test
   ament_add_gtest_executable(test_servo_integration
@@ -208,7 +208,7 @@ if(BUILD_TESTING)
   )
   target_link_libraries(test_servo_integration ${SERVO_PARAM_LIB_NAME})
   ament_target_dependencies(test_servo_integration ${THIS_PACKAGE_INCLUDE_DEPENDS})
-  add_ros_test(test/launch/test_servo_integration.test.py ARGS "test_binary_dir:=${CMAKE_CURRENT_BINARY_DIR}")
+  add_ros_test(test/launch/test_servo_integration.test.py ARGS TIMEOUT 120 "test_binary_dir:=${CMAKE_CURRENT_BINARY_DIR}")
 
   # Servo collision checking integration test
   ament_add_gtest_executable(test_servo_collision
@@ -217,7 +217,7 @@ if(BUILD_TESTING)
   )
   target_link_libraries(test_servo_collision ${SERVO_PARAM_LIB_NAME})
   ament_target_dependencies(test_servo_collision ${THIS_PACKAGE_INCLUDE_DEPENDS})
-  add_ros_test(test/launch/test_servo_collision.test.py ARGS "test_binary_dir:=${CMAKE_CURRENT_BINARY_DIR}")
+  add_ros_test(test/launch/test_servo_collision.test.py TIMEOUT 120 ARGS "test_binary_dir:=${CMAKE_CURRENT_BINARY_DIR}")
 
   # Servo singularity checking integration test
   ament_add_gtest_executable(test_servo_singularity
@@ -226,7 +226,7 @@ if(BUILD_TESTING)
   )
   target_link_libraries(test_servo_singularity ${SERVO_PARAM_LIB_NAME})
   ament_target_dependencies(test_servo_singularity ${THIS_PACKAGE_INCLUDE_DEPENDS})
-  add_ros_test(test/launch/test_servo_singularity.test.py ARGS "test_binary_dir:=${CMAKE_CURRENT_BINARY_DIR}")
+  add_ros_test(test/launch/test_servo_singularity.test.py TIMEOUT 120 ARGS "test_binary_dir:=${CMAKE_CURRENT_BINARY_DIR}")
 
   # TODO(henningkayser): Port tests to ROS2
   # servo_cpp_interface
@@ -245,7 +245,7 @@ if(BUILD_TESTING)
   )
   ament_target_dependencies(test_servo_pose_tracking ${THIS_PACKAGE_INCLUDE_DEPENDS})
   target_link_libraries(test_servo_pose_tracking ${POSE_TRACKING})
-  add_ros_test(test/launch/test_servo_pose_tracking.test.py ARGS "test_binary_dir:=${CMAKE_CURRENT_BINARY_DIR}")
+  add_ros_test(test/launch/test_servo_pose_tracking.test.py TIMEOUT 120 ARGS "test_binary_dir:=${CMAKE_CURRENT_BINARY_DIR}")
 
   # basic_servo_tests
   ament_add_gtest_executable(basic_servo_tests
@@ -253,7 +253,7 @@ if(BUILD_TESTING)
   )
   ament_target_dependencies(basic_servo_tests ${THIS_PACKAGE_INCLUDE_DEPENDS})
   target_link_libraries(basic_servo_tests ${POSE_TRACKING})
-  add_ros_test(test/launch/test_basic_servo.test.py ARGS "test_binary_dir:=${CMAKE_CURRENT_BINARY_DIR}")
+  add_ros_test(test/launch/test_basic_servo.test.py TIMEOUT 120 ARGS "test_binary_dir:=${CMAKE_CURRENT_BINARY_DIR}")
 
 endif()
 
