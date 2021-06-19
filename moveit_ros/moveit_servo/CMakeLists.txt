@@ -193,13 +193,13 @@ if(BUILD_TESTING)
   # The issue is that the test completes successfully but a results file is not generated.
 
   # Unit test for ServoCalcs
-  ament_add_gtest_executable(
-    unit_test_servo_calcs
-    test/unit_test_servo_calcs.cpp
-  )
-  target_link_libraries(unit_test_servo_calcs ${SERVO_LIB_NAME})
-  ament_target_dependencies(unit_test_servo_calcs ${THIS_PACKAGE_INCLUDE_DEPENDS} Boost)
-  add_ros_test(test/launch/unit_test_servo_calcs.test.py ARGS "test_binary_dir:=${CMAKE_CURRENT_BINARY_DIR}")
+  # ament_add_gtest_executable(
+  #   unit_test_servo_calcs
+  #   test/unit_test_servo_calcs.cpp
+  # )
+  # target_link_libraries(unit_test_servo_calcs ${SERVO_LIB_NAME})
+  # ament_target_dependencies(unit_test_servo_calcs ${THIS_PACKAGE_INCLUDE_DEPENDS} Boost)
+  # add_ros_test(test/launch/unit_test_servo_calcs.test.py ARGS "test_binary_dir:=${CMAKE_CURRENT_BINARY_DIR}")
 
   # Servo integration launch test
   ament_add_gtest_executable(test_servo_integration
