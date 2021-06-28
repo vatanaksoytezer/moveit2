@@ -17,8 +17,9 @@ jobs:
         env:
           - ROS_DISTRO: rolling
             ROS_REPO: main
-          - ROS_DISTRO: rolling
-            ROS_REPO: testing
+          # - ROS_DISTRO: rolling
+          #   ROS_REPO: testing
+
     env:
       UPSTREAM_WORKSPACE: moveit2_rolling.repos
       AFTER_SETUP_UPSTREAM_WORKSPACE: vcs pull $BASEDIR/upstream_ws/src
