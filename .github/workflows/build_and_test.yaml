@@ -108,7 +108,7 @@ jobs:
       contents: read
     env:
       IMAGE_NAME: moveit2/foxy-source
-      IMAGE_ID: ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
+      IMAGE_ID: ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME
       VERSION: latest
 
     steps:
