@@ -108,21 +108,21 @@ jobs:
       contents: read
     env:
       IMAGE_NAME: moveit2/foxy-source
-      IMAGE_ID: ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME
+      IMAGE_ID: ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
       VERSION: latest
 
     steps:
       - uses: actions/checkout@v2
 
       - name: Build image
-        run: docker build . --file .docker/source/Dockerfile --tag $IMAGE_NAME
+        run: docker build . --file .docker/source/Dockerfile --tag ${{ env.IMAGE_NAME }}
 
       - name: Log in to registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Push image
         run: |
-          echo IMAGE_ID=$IMAGE_ID
-          echo VERSION=$VERSION
-          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:$VERSION
+          echo IMAGE_ID=${{ env.IMAGE_ID }}
+          echo VERSION=${{ env.VERSION }}
+          docker tag ${{ env.IMAGE_NAME }} ${{ env.IMAGE_ID }}:${{ env.VERSION }}
+          docker push ${{ env.IMAGE_ID }}:${{ env.VERSION }}
