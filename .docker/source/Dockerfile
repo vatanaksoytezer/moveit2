@@ -14,7 +14,7 @@ WORKDIR $ROS_UNDERLAY/../src
 # https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#minimize-the-number-of-layers
 RUN \
     # Download moveit source so that we can get necessary dependencies
-    git clone https://github.com/ros-planning/moveit2.git -b main && \
+    git clone https://github.com/ros-planning/moveit2.git -b foxy && \
     vcs import < moveit2/moveit2.repos && \
     #
     # Update apt package list as cache is cleared in previous container
