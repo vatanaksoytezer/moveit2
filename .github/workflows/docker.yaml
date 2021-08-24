@@ -2,27 +2,67 @@ name: docker
 
 on:
   schedule:
-    # 5 PM UTC, 10 AM PT every Monday
-    - cron:  '0 17 * * 0'
+    # 5 PM UTC every Sunday
+    - cron:  '0 17 * * 6'
   workflow_dispatch:
   push:
     branches:
       - main
 
 jobs:
+  check_push_event:
+    name: Check Push Event
+    runs-on: ubuntu-latest
+    outputs:
+      trigger: ${{ steps.check_push.outputs.trigger }}
+    steps:
+      - name: Set Push Event Outputs
+        id: check_push
+        if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch'  }}
+        run: echo "::set-output name=trigger::true"
+  check_apt_updates:
+    strategy:
+      fail-fast: false
+      matrix:
+        IMAGE: [rolling-ci, rolling-ci-testing, galactic-ci, galactic-ci-testing]
+    name: Check ROS Updates
+    if: github.event_name == 'schedule'
+    needs: check_push_event
+    runs-on: ubuntu-latest
+    outputs:
+      trigger-rolling-ci: ${{ steps.check-rolling-ci.outputs.trigger }}
+      trigger-rolling-ci-testing: ${{ steps.check-rolling-ci-testing.outputs.trigger }}
+      trigger-galactic-ci: ${{ steps.check-galactic-ci.outputs.trigger }}
+      trigger-galactic-ci-testing: ${{ steps.check-galactic-ci-testing.outputs.trigger }}
+    steps:
+      - name: Check apt updates ${{ env.IMAGE }}
+        id: check-${{ env.IMAGE }}
+        uses: docker://ghcr.io/ros-planning/moveit2:${{ env.IMAGE }} 
+        env:
+          SOURCELIST: sources.list.d/ros2.list
+        run: |
+          apt-get update \
+            -o Dir::Etc::sourcelist="${SOURCELIST}"
+          apt-get --simulate upgrade \
+            -o Dir::Etc::sourcelist="${SOURCELIST}" \
+            | grep "^0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.$" \
+            && echo "::set-output name=trigger::false" \  
+            || echo "::set-output name=trigger::true"
+
   release:
     strategy:
       fail-fast: false
       matrix:
         ROS_DISTRO: [rolling, galactic]
+    needs:
+      - check_push_event
+      - check_apt_updates
     runs-on: ubuntu-latest
     permissions:
       packages: write
       contents: read
     env:
       IMAGE: ghcr.io/ros-planning/moveit2:${{ matrix.ROS_DISTRO }}-${{ github.job }}
-    outputs:
-      no_cache: ${{ steps.check.outputs.no_cache }}
 
     steps:
       - name: Set up Docker Buildx
@@ -33,21 +73,14 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Check apt updates
-        if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
-        run: |
-            apt-get update -o Dir::Etc::sourcelist="${SOURCELIST}"
-            apt-get --simulate upgrade -o Dir::Etc::sourcelist="${SOURCELIST}" \
-            | grep "^0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.$" \
-            && echo "::set-output name=trigger::false" \
-            || echo "::set-output name=trigger::true"
-            echo "::set-output name=no_cache::true"
       - name: Build and Push
+        if: ${{ needs.check_ci_files.outputs.no_cache }}
         uses: docker/build-push-action@v2
         with:
           file: .docker/${{ github.job }}/Dockerfile
           build-args: ROS_DISTRO=${{ matrix.ROS_DISTRO }}
           push: true
+          no_cache: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
           cache-from: type=registry,ref=${{ env.IMAGE }}
           cache-to: type=inline
           tags: ${{ env.IMAGE }}
@@ -79,6 +112,7 @@ jobs:
           file: .docker/${{ github.job }}/Dockerfile
           build-args: ROS_DISTRO=${{ matrix.ROS_DISTRO }}
           push: true
+          no_cache: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
           cache-from: type=registry,ref=${{ env.IMAGE }}
           cache-to: type=inline
           tags: ${{ env.IMAGE }}
@@ -111,6 +145,7 @@ jobs:
           file: .docker/${{ github.job }}/Dockerfile
           build-args: ROS_DISTRO=${{ matrix.ROS_DISTRO }}
           push: true
+          no_cache: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
           cache-from: type=registry,ref=${{ env.IMAGE }}
           cache-to: type=inline
           tags: ${{ env.IMAGE }}
