@@ -141,31 +141,31 @@ jobs:
   #         cache-to: type=inline
   #         tags: ${{ env.IMAGE }}
 
-  delete_untagged:
-    runs-on: ubuntu-latest
-    needs:
-      - release
-      - ci-testing
-    permissions:
-      packages: write
-      contents: read
-    steps:
-      - name: Delete Untagged Images
-        uses: actions/github-script@v3
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const response = await github.request("GET /${{ env.OWNER }}/packages/container/${{ env.PACKAGE_NAME }}/versions",
-              { per_page: ${{ env.PER_PAGE }}
-            });
-            for(version of response.data) {
-                if (version.metadata.container.tags.length == 0) {
-                    console.log("delete " + version.id)
-                    const deleteResponse = await github.request("DELETE /${{ env.OWNER }}/packages/container/${{ env.PACKAGE_NAME }}/versions/" + version.id, { });
-                    console.log("status " + deleteResponse.status)
-                }
-            }
-        env:
-          OWNER: user
-          PACKAGE_NAME: moveit2
-          PER_PAGE: 1000
+  # delete_untagged:
+  #   runs-on: ubuntu-latest
+  #   needs:
+  #     - release
+  #     - ci-testing
+  #   permissions:
+  #     packages: write
+  #     contents: read
+  #   steps:
+  #     - name: Delete Untagged Images
+  #       uses: actions/github-script@v3
+  #       with:
+  #         github-token: ${{ secrets.GITHUB_TOKEN }}
+  #         script: |
+  #           const response = await github.request("GET /${{ env.OWNER }}/packages/container/${{ env.PACKAGE_NAME }}/versions",
+  #             { per_page: ${{ env.PER_PAGE }}
+  #           });
+  #           for(version of response.data) {
+  #               if (version.metadata.container.tags.length == 0) {
+  #                   console.log("delete " + version.id)
+  #                   const deleteResponse = await github.request("DELETE /${{ env.OWNER }}/packages/container/${{ env.PACKAGE_NAME }}/versions/" + version.id, { });
+  #                   console.log("status " + deleteResponse.status)
+  #               }
+  #           }
+  #       env:
+  #         OWNER: user
+  #         PACKAGE_NAME: moveit2
+  #         PER_PAGE: 1000
