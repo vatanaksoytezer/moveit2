@@ -21,7 +21,7 @@ jobs:
       packages: write
       contents: read
     env:
-      IMAGE: ghcr.io/ros-planning/moveit2:${{ matrix.ROS_DISTRO }}-${{ github.job }}
+      IMAGE: ghcr.io/vatanaksoytezer/moveit2:${{ matrix.ROS_DISTRO }}-${{ github.job }}
 
     steps:
       - name: Set up Docker Buildx
@@ -53,7 +53,7 @@ jobs:
       packages: write
       contents: read
     env:
-      IMAGE: ghcr.io/ros-planning/moveit2:${{ matrix.ROS_DISTRO }}-${{ github.job }}
+      IMAGE: ghcr.io/vatanaksoytezer/moveit2:${{ matrix.ROS_DISTRO }}-${{ github.job }}
 
     steps:
       - name: Set up Docker Buildx
@@ -86,7 +86,7 @@ jobs:
       packages: write
       contents: read
     env:
-      IMAGE: ghcr.io/ros-planning/moveit2:${{ matrix.ROS_DISTRO }}-${{ github.job }}
+      IMAGE: ghcr.io/vatanaksoytezer/moveit2:${{ matrix.ROS_DISTRO }}-${{ github.job }}
 
     steps:
       - name: Set up Docker Buildx
@@ -120,7 +120,7 @@ jobs:
   #     packages: write
   #     contents: read
   #   env:
-  #     IMAGE: ghcr.io/ros-planning/moveit2:${{ matrix.ROS_DISTRO }}-${{ github.job }}
+  #     IMAGE: ghcr.io/vatanaksoytezer/moveit2:${{ matrix.ROS_DISTRO }}-${{ github.job }}
 
   #   steps:
   #     - name: Set up Docker Buildx
