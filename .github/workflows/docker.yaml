@@ -21,7 +21,7 @@ jobs:
       packages: write
       contents: read
     env:
-      GH_IMAGE: ghcr.io/ros-planning/moveit2:${{ matrix.ROS_DISTRO }}-${{ github.job }}
+      GH_IMAGE: ghcr.io/vatanaksoytezer/moveit2:${{ matrix.ROS_DISTRO }}-${{ github.job }}
       DH_IMAGE: moveit/moveit2:${{ matrix.ROS_DISTRO }}-${{ github.job }}
 
     steps:
@@ -60,7 +60,6 @@ jobs:
           cache-to: type=inline
           tags: |
             ${{ env.GH_IMAGE }}
-            ${{ env.DH_IMAGE }}
 
   ci:
     strategy:
@@ -72,7 +71,7 @@ jobs:
       packages: write
       contents: read
     env:
-      GH_IMAGE: ghcr.io/ros-planning/moveit2:${{ matrix.ROS_DISTRO }}-${{ github.job }}
+      GH_IMAGE: ghcr.io/vatanaksoytezer/moveit2:${{ matrix.ROS_DISTRO }}-${{ github.job }}
       DH_IMAGE: moveit/moveit2:${{ matrix.ROS_DISTRO }}-${{ github.job }}
 
     steps:
@@ -111,7 +110,6 @@ jobs:
           cache-to: type=inline
           tags: |
             ${{ env.GH_IMAGE }}
-            ${{ env.DH_IMAGE }}
 
   ci-testing:
     needs: ci
@@ -124,7 +122,7 @@ jobs:
       packages: write
       contents: read
     env:
-      GH_IMAGE: ghcr.io/ros-planning/moveit2:${{ matrix.ROS_DISTRO }}-${{ github.job }}
+      GH_IMAGE: ghcr.io/vatanaksoytezer/moveit2:${{ matrix.ROS_DISTRO }}-${{ github.job }}
       DH_IMAGE: moveit/moveit2:${{ matrix.ROS_DISTRO }}-${{ github.job }}
 
     steps:
@@ -163,7 +161,6 @@ jobs:
           cache-to: type=inline
           tags: |
             ${{ env.GH_IMAGE }}
-            ${{ env.DH_IMAGE }}
 
   source:
     needs: ci-testing
@@ -176,7 +173,7 @@ jobs:
       packages: write
       contents: read
     env:
-      GH_IMAGE: ghcr.io/ros-planning/moveit2:${{ matrix.ROS_DISTRO }}-${{ github.job }}
+      GH_IMAGE: ghcr.io/vatanaksoytezer/moveit2:${{ matrix.ROS_DISTRO }}-${{ github.job }}
       DH_IMAGE: moveit/moveit2:${{ matrix.ROS_DISTRO }}-${{ github.job }}
 
     steps:
@@ -204,4 +201,3 @@ jobs:
           no-cache: true
           tags: |
             ${{ env.GH_IMAGE }}
-            ${{ env.DH_IMAGE }}
