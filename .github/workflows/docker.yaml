@@ -9,7 +9,6 @@ on:
   push:
     branches:
       - main
-      - foxy_docker_test
 
 jobs:
   release:
