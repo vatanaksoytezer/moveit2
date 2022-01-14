@@ -9,6 +9,7 @@ on:
   push:
     branches:
       - main
+      - test/api_doc_gen_colcon
 
 jobs:
   default:
@@ -157,8 +158,8 @@ jobs:
         if: matrix.env.DOXYGEN && ${{ github.event_name != 'pull_request' }}
         # Gen Docs using colcon
         run: |
-          cd ${{ env.BASEDIR }}/target_ws
-          colcon build --event-handlers console_direct+ desktop_notification- status- terminal_title- --cmake-args -DENABLE_DOXYGEN=ON --cmake-target doxygen-docs --packages-up-to moveit --cmake-target-skip-unavailable
+          cd ${{ env.BASEDIR }}/target_ws && \
+          colcon build --event-handlers console_direct+ desktop_notification- status- terminal_title- --cmake-args -DENABLE_DOXYGEN=ON --cmake-target doxygen-docs --cmake-target-skip-unavailable
         uses: s0/git-publish-subdir-action@v2.5.0
         env:
           REPO: self
