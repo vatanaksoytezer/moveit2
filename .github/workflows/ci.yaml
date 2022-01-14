@@ -20,10 +20,10 @@ jobs:
           - IMAGE: rolling-ci
             CCOV: true
             ROS_DISTRO: rolling
-            DOXYGEN: true
           - IMAGE: rolling-ci-testing
-            IKFAST_TEST: true
+            IKFAST_TEST: false
             ROS_DISTRO: rolling
+            DOXYGEN: true
           - IMAGE: galactic-ci
             CLANG_TIDY: pedantic
             ROS_DISTRO: galactic
