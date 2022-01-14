@@ -1,0 +1,5 @@
+<map id="moveit::core::JointModelGroup::isContiguousWithinState" name="moveit::core::JointModelGroup::isContiguousWithinState">
+<area shape="rect" id="node1" title=" " alt="" coords="244,39,473,80"/>
+<area shape="rect" id="node2" href="$classmoveit_1_1core_1_1RobotState.html#aeadabef2a51ac56f8c7bcfc4bd15f590" title="Invert velocity if present." alt="" coords="9,5,193,47"/>
+<area shape="rect" id="node3" href="$classmoveit_1_1core_1_1RobotState.html#a37b20205c4e71f85bc4ac228f6741496" title="Set the accelerations of a set of variables. If unknown variable names are specified,..." alt="" coords="5,71,196,112"/>
+</map>

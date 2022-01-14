@@ -1,0 +1,5 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" title=" " alt="" coords="5,31,116,57"/>
+<area shape="rect" id="node2" href="$classmoveit_1_1ConstructException.html" title="This may be thrown during construction of objects if errors occur." alt="" coords="164,5,367,32"/>
+<area shape="rect" id="node3" href="$classmoveit_1_1Exception.html" title="This may be thrown if unrecoverable errors occur." alt="" coords="195,56,335,83"/>
+</map>

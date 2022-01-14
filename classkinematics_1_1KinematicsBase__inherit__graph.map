@@ -1,0 +1,4 @@
+<map id="kinematics::KinematicsBase" name="kinematics::KinematicsBase">
+<area shape="rect" id="node1" title="Provides an interface for kinematics solvers." alt="" coords="5,5,212,32"/>
+<area shape="rect" id="node2" href="$classpr2__arm__kinematics_1_1PR2ArmKinematicsPlugin.html" title=" " alt="" coords="11,80,206,121"/>
+</map>

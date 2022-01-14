@@ -1,0 +1,4 @@
+<map id="moveit::core::RobotModelBuilder::addGroupChain" name="moveit::core::RobotModelBuilder::addGroupChain">
+<area shape="rect" id="node1" title="Adds a new group using a chain of links. The group is the parent joint of each link in the chain." alt="" coords="196,5,387,47"/>
+<area shape="rect" id="node2" href="$classFloatingJointRobot.html#a9faca1791b389deb84da7921478f8180" title=" " alt="" coords="5,5,148,47"/>
+</map>

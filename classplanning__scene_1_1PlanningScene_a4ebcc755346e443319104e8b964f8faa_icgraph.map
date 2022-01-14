@@ -1,0 +1,9 @@
+<map id="planning_scene::PlanningScene::checkCollision" name="planning_scene::PlanningScene::checkCollision">
+<area shape="rect" id="node1" title="Check whether the current state is in collision, and if needed, updates the collision transforms of t..." alt="" coords="608,71,795,112"/>
+<area shape="rect" id="node2" href="$pymoveit__core_8cpp.html#acdb1e01a5a6ec640937d8c69c0f7d045" title=" " alt="" coords="391,5,542,47"/>
+<area shape="rect" id="node4" href="$classplanning__scene_1_1PlanningScene.html#a126bf18f2497eaed9675d57b287ce783" title="Check if a given path is valid. Each state is checked for validity (collision avoidance,..." alt="" coords="373,71,560,112"/>
+<area shape="rect" id="node5" href="$test__multi__threaded_8cpp.html#afbc4f38aad5c160dc25d8cc48c67e75d" title=" " alt="" coords="385,137,548,163"/>
+<area shape="rect" id="node3" href="$pymoveit__core_8cpp.html#aae5c18014d007aef7676d42ced1ba2b0" title=" " alt="" coords="149,13,299,39"/>
+<area shape="rect" id="node6" href="$test__multi__threaded_8cpp.html#ac4ec2632451a0670af2e66e3e7461f1f" title=" " alt="" coords="123,111,325,138"/>
+<area shape="rect" id="node7" href="$test__multi__threaded_8cpp.html#ad41b8bdce67cc855d0a802424635ab9f" title="Tests the collision detector in multiple threads." alt="" coords="5,137,75,163"/>
+</map>

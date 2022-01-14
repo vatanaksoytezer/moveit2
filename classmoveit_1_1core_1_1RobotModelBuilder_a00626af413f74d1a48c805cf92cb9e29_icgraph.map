@@ -1,0 +1,6 @@
+<map id="moveit::core::RobotModelBuilder::addChain" name="moveit::core::RobotModelBuilder::addChain">
+<area shape="rect" id="node1" title="Adds a chain of links and joints to the builder. The joint names are generated automatically as &quot;&lt;par..." alt="" coords="196,64,387,105"/>
+<area shape="rect" id="node2" href="$classFloatingJointRobot.html#a9faca1791b389deb84da7921478f8180" title=" " alt="" coords="5,5,148,47"/>
+<area shape="rect" id="node3" href="$test_8cpp.html#ae0dd3a024220e08fc63e32addd353532" title=" " alt="" coords="49,71,104,98"/>
+<area shape="rect" id="node4" href="$test__aabb_8cpp.html#a836ccbd4cc42830e7d81b6bb50373553" title=" " alt="" coords="42,122,111,149"/>
+</map>

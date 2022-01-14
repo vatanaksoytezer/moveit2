@@ -1,0 +1,5 @@
+<map id="moveit::core::RobotState::setVariableEffort" name="moveit::core::RobotState::setVariableEffort">
+<area shape="rect" id="node1" title="Set the effort of a set of variables. If unknown variable names are specified, an exception is thrown..." alt="" coords="5,39,189,80"/>
+<area shape="rect" id="node2" href="$classmoveit_1_1core_1_1JointModelGroup.html#a14fb89fcb1b1d7297b5ddd3d063c715f" title="Get the active joints in this group (that have controllable DOF). This does not include mimic joints." alt="" coords="245,5,452,47"/>
+<area shape="rect" id="node3" href="$classmoveit_1_1core_1_1JointModelGroup.html#ad316d79fcf4e69a27d443e5d02c3029f" title="Get the number of variables that describe the active joints in this joint group. This excludes variab..." alt="" coords="237,71,460,112"/>
+</map>

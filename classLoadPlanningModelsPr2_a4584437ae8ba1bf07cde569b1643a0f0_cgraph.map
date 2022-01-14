@@ -1,0 +1,5 @@
+<map id="LoadPlanningModelsPr2::SetUp" name="LoadPlanningModelsPr2::SetUp">
+<area shape="rect" id="node1" title=" " alt="" coords="5,23,183,65"/>
+<area shape="rect" id="node2" href="$namespacemoveit_1_1core.html#a9d39f2316f4754a5fe4bd8abe00e7660" title="Loads a URDF Model Interface from moveit_resources." alt="" coords="231,5,469,32"/>
+<area shape="rect" id="node3" href="$namespacemoveit_1_1core.html#a847525b7f896c71b15746e7941194d6b" title="Loads an SRDF Model from moveit_resources." alt="" coords="243,56,457,83"/>
+</map>

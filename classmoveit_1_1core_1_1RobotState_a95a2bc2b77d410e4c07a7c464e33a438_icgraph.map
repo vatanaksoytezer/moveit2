@@ -1,0 +1,4 @@
+<map id="moveit::core::RobotState::distance" name="moveit::core::RobotState::distance">
+<area shape="rect" id="node1" title="Return the sum of joint distances to &quot;other&quot; state. An L1 norm. Only considers active joints." alt="" coords="123,5,307,47"/>
+<area shape="rect" id="node2" href="$robot__state__test_8cpp.html#af3f503f9c9cd0b80c36d72fb0679dfe5" title=" " alt="" coords="5,13,75,39"/>
+</map>

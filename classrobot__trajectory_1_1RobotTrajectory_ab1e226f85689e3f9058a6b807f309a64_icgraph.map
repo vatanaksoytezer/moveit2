@@ -1,0 +1,8 @@
+<map id="robot_trajectory::RobotTrajectory::insertWayPoint" name="robot_trajectory::RobotTrajectory::insertWayPoint">
+<area shape="rect" id="node1" title=" " alt="" coords="588,78,823,119"/>
+<area shape="rect" id="node2" href="$classrobot__trajectory_1_1RobotTrajectory.html#a8d818ea730ce7620ca2b15edd70f774e" title="Add a point to the trajectory." alt="" coords="305,19,539,61"/>
+<area shape="rect" id="node4" href="$test__robot__trajectory_8cpp.html#ac2eca9d77186f589d9148d63fbef0006" title=" " alt="" coords="96,85,165,112"/>
+<area shape="rect" id="node5" href="$classtrajectory__processing_1_1IterativeSplineParameterization.html#ab01c18e50f1663358c658651e1fde2c5" title=" " alt="" coords="304,136,540,192"/>
+<area shape="rect" id="node3" href="$classtrajectory__processing_1_1TimeOptimalTrajectoryGeneration.html#a5ad18a23d5b6f0beedaa4b6e20f8b01b" title=" " alt="" coords="5,5,256,61"/>
+<area shape="rect" id="node6" href="$test__time__parameterization_8cpp.html#a1fb67aa34417d03016c74d44bd7f54e0" title=" " alt="" coords="103,151,158,177"/>
+</map>

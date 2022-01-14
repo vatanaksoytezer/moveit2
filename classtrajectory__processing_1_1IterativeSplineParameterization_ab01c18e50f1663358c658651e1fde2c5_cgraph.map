@@ -1,0 +1,16 @@
+<map id="trajectory_processing::IterativeSplineParameterization::computeTimeStamps" name="trajectory_processing::IterativeSplineParameterization::computeTimeStamps">
+<area shape="rect" id="node1" title=" " alt="" coords="5,390,241,446"/>
+<area shape="rect" id="node2" href="$classrobot__trajectory_1_1RobotTrajectory.html#afdd5cc4e84e484af2dc6ea337f62719e" title=" " alt="" coords="289,5,524,47"/>
+<area shape="rect" id="node3" href="$classrobot__trajectory_1_1RobotTrajectory.html#a6eaef50c3127c83dbc5ca393376435b1" title=" " alt="" coords="289,71,524,112"/>
+<area shape="rect" id="node4" href="$classmoveit_1_1core_1_1JointModelGroup.html#a854e1c3f7e18cd79755f3e687ad47ccd" title="Get the kinematic model this group is part of." alt="" coords="316,136,497,177"/>
+<area shape="rect" id="node5" href="$classmoveit_1_1core_1_1RobotModel.html#a0e6fe94c867b3452abdeecc2d7373ca2" title="Get the bounds for a specific variable. Throw an exception of variable is not found." alt="" coords="311,201,502,243"/>
+<area shape="rect" id="node6" href="$classmoveit_1_1core_1_1JointModelGroup.html#aa84a6083c84b6efcba6b84c18e9cec15" title="Get the number of variables that describe this joint group. This includes variables necessary for mim..." alt="" coords="316,267,497,308"/>
+<area shape="rect" id="node7" href="$classmoveit_1_1core_1_1JointModelGroup.html#ab0d0e29514820e4ccb2647456ba5cc25" title="Get the index locations in the complete robot state for all the variables in this group." alt="" coords="305,332,508,373"/>
+<area shape="rect" id="node8" href="$classmoveit_1_1core_1_1JointModelGroup.html#aaaeee5ac20a07f6d5c1fe43a892f005a" title="Get the names of the variables that make up the joints included in this group. The number of returned..." alt="" coords="312,397,501,439"/>
+<area shape="rect" id="node9" href="$classrobot__trajectory_1_1RobotTrajectory.html#af356952b9847bc920b773f2f83cb9943" title=" " alt="" coords="289,463,524,504"/>
+<area shape="rect" id="node10" href="$classrobot__trajectory_1_1RobotTrajectory.html#ababf812aa287c586d9ad0b190e1d2482" title=" " alt="" coords="289,528,524,569"/>
+<area shape="rect" id="node11" href="$classrobot__trajectory_1_1RobotTrajectory.html#aa02527d5b79f3249febefb4780743746" title=" " alt="" coords="289,593,524,635"/>
+<area shape="rect" id="node12" href="$classrobot__trajectory_1_1RobotTrajectory.html#ab1e226f85689e3f9058a6b807f309a64" title=" " alt="" coords="289,659,524,700"/>
+<area shape="rect" id="node13" href="$classmoveit_1_1core_1_1RobotState.html#a54879052daa602ea0319cbe3ded82ff3" title="Set the position of a single variable. An exception is thrown if the variable name is not known." alt="" coords="315,724,499,765"/>
+<area shape="rect" id="node14" href="$classrobot__trajectory_1_1RobotTrajectory.html#a7804317b96eb6c13639839b1276ac04c" title=" " alt="" coords="289,789,524,831"/>
+</map>

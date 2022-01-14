@@ -1,0 +1,6 @@
+<map id="robot_trajectory::RobotTrajectory::setRobotTrajectoryMsg" name="robot_trajectory::RobotTrajectory::setRobotTrajectoryMsg">
+<area shape="rect" id="node1" title="Copy the content of the trajectory message into this class. The trajectory message itself is not requ..." alt="" coords="475,35,709,76"/>
+<area shape="rect" id="node2" href="$classplanning__scene_1_1PlanningScene.html#a46f024838af9e42c7afb0950c11a97f7" title="Check if a given path is valid. Each state is checked for validity (collision avoidance and feasibili..." alt="" coords="240,5,427,47"/>
+<area shape="rect" id="node4" href="$test__robot__trajectory_8cpp.html#ac2eca9d77186f589d9148d63fbef0006" title=" " alt="" coords="299,71,368,98"/>
+<area shape="rect" id="node3" href="$classplanning__scene_1_1PlanningScene.html#ad4bd37ca382d39ef17072e73e806cc3b" title="Check if a given state is valid. This means checking for collisions, feasibility and whether the user..." alt="" coords="5,5,192,47"/>
+</map>

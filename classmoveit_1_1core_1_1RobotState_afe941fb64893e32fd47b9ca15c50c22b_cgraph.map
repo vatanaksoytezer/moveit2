@@ -1,0 +1,4 @@
+<map id="moveit::core::RobotState::setVariableAccelerations" name="moveit::core::RobotState::setVariableAccelerations">
+<area shape="rect" id="node1" title="Set the accelerations of a set of variables. If unknown variable names are specified,..." alt="" coords="5,5,196,47"/>
+<area shape="rect" id="node2" href="$classmoveit_1_1core_1_1JointModelGroup.html#ab0d0e29514820e4ccb2647456ba5cc25" title="Get the index locations in the complete robot state for all the variables in this group." alt="" coords="244,5,447,47"/>
+</map>

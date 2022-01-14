@@ -1,0 +1,9 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" title=" " alt="" coords="5,13,192,39"/>
+<area shape="rect" id="node2" href="$classplanning__scene_1_1PlanningScene.html" title="This class maintains the representation of the environment as seen by a planning instance...." alt="" coords="243,5,430,47"/>
+<area shape="rect" id="node3" title=" " alt="" coords="46,101,151,127"/>
+<area shape="rect" id="node4" href="$classmoveit_1_1core_1_1Transforms.html" title="Provides an implementation of a snapshot of a transform tree that can be easily queried for transform..." alt="" coords="245,71,429,98"/>
+<area shape="rect" id="node6" href="$classmoveit_1_1tools_1_1BackgroundProcessing.html" title="This class provides simple API for executing background jobs. A queue of jobs is created and the spec..." alt="" coords="240,123,433,164"/>
+<area shape="rect" id="node7" href="$classmoveit_1_1tools_1_1Profiler.html" title=" " alt="" coords="255,189,418,215"/>
+<area shape="rect" id="node5" href="$classplanning__scene_1_1SceneTransforms.html" title=" " alt="" coords="481,71,724,98"/>
+</map>

@@ -1,0 +1,12 @@
+<map id="pr2_arm_kinematics::distance" name="pr2_arm_kinematics::distance">
+<area shape="rect" id="node1" title=" " alt="" coords="759,185,913,226"/>
+<area shape="rect" id="node2" href="$classtrajectory__processing_1_1CircularPathSegment.html#a90d4d6eaec6fb7f2377637145659f1ce" title=" " alt="" coords="524,5,691,61"/>
+<area shape="rect" id="node4" href="$namespacepr2__arm__kinematics.html#a31e48e861fab1c1a426bda845bf56303" title=" " alt="" coords="504,86,711,127"/>
+<area shape="rect" id="node7" href="$classmoveit_1_1core_1_1RobotState.html#ab4350d31968cbac757a0794427813dcb" title="Remove accelerations from this state (this differs from setting them to zero)" alt="" coords="515,151,699,193"/>
+<area shape="rect" id="node8" href="$classmoveit_1_1core_1_1RobotState.html#a7edbdff28a1333edc0429b98744ab4ca" title="Reduce RobotState to kinematic information (remove velocity, acceleration and effort,..." alt="" coords="515,217,699,258"/>
+<area shape="rect" id="node9" href="$classmoveit_1_1core_1_1RobotState.html#a3a536c5dedb52fe45e696ddcd1781345" title=" " alt="" coords="515,282,699,323"/>
+<area shape="rect" id="node10" href="$test__collision__common__panda_8h.html#aab97612ac359bd9fc11e4ddc89a524f0" title=" " alt="" coords="548,348,667,375"/>
+<area shape="rect" id="node3" href="$classtrajectory__processing_1_1CircularPathSegment.html#a28829eae7be85f2703484950ed0c4046" title=" " alt="" coords="271,5,438,61"/>
+<area shape="rect" id="node5" href="$classpr2__arm__kinematics_1_1PR2ArmIKSolver.html#aa43e423c92bc7e7e6d4c71b61f8bbfaa" title=" " alt="" coords="253,86,456,127"/>
+<area shape="rect" id="node6" href="$classpr2__arm__kinematics_1_1PR2ArmIKSolver.html#a610febcc067ce01ad248d9c8d4c010ad" title=" " alt="" coords="5,79,205,135"/>
+</map>

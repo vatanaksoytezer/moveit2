@@ -1,0 +1,4 @@
+<map id="collision_detection::CollisionPluginCache::activate" name="collision_detection::CollisionPluginCache::activate">
+<area shape="rect" id="node1" title="Activate a specific collision plugin for the given planning scene instance." alt="" coords="123,5,289,61"/>
+<area shape="rect" id="node2" href="$test__multi__threaded_8cpp.html#ad41b8bdce67cc855d0a802424635ab9f" title="Tests the collision detector in multiple threads." alt="" coords="5,20,75,47"/>
+</map>

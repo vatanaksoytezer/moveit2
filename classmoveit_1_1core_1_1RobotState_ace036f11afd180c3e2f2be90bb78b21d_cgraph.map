@@ -1,0 +1,4 @@
+<map id="moveit::core::RobotState::integrateVariableVelocity" name="moveit::core::RobotState::integrateVariableVelocity">
+<area shape="rect" id="node1" title="Given the velocities for the variables in this group (qdot) and an amount of time (dt),..." alt="" coords="5,13,200,54"/>
+<area shape="rect" id="node2" href="$classmoveit_1_1core_1_1JointModelGroup.html#a76acd9acff57851f65b4221b51b3219d" title="Return the mapping between the order of the joints in this group and the order of the joints in the k..." alt="" coords="248,5,481,61"/>
+</map>
