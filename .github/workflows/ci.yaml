@@ -39,7 +39,14 @@ jobs:
       AFTER_SETUP_DOWNSTREAM_WORKSPACE: vcs pull $BASEDIR/downstream_ws/src
       # Clear the ccache stats before and log the stats after the build
       BEFORE_BUILD_UPSTREAM_WORKSPACE: ccache -z
-      AFTER_BUILD_TARGET_WORKSPACE: ccache -s
+      AFTER_BUILD_TARGET_WORKSPACE: |
+        # Show ccache stats
+        ccache -s
+        # Build documentation (TODO: Only if doxygen flag is here)
+        set +u && \
+        source /opt/ros/${{ matrix.env.ROS_DISTRO }}/setup.bash && \
+        cd ${{ env.BASEDIR }}/target_ws && \
+        colcon build --event-handlers console_direct+ desktop_notification- status- terminal_title- --cmake-args -DENABLE_DOXYGEN=ON --cmake-target doxygen-docs --cmake-target-skip-unavailable
       # Changing linker to lld as ld has a behavior where it takes a long time to finish
       TARGET_CMAKE_ARGS: >
         -DCMAKE_EXE_LINKER_FLAGS=-fuse-ld=lld
@@ -57,7 +64,7 @@ jobs:
         find $BASEDIR/target_ws/build -iwholename "*_ikfast_plugin/compile_commands.json" -exec rm {} \;
       CC: ${{ matrix.env.CLANG_TIDY && 'clang' }}
       CXX: ${{ matrix.env.CLANG_TIDY && 'clang++' }}
-      ADDITIONAL_DEBS: lld
+      ADDITIONAL_DEBS: lld graphviz doxygen
 
     name: ${{ matrix.env.IMAGE }}${{ matrix.env.CCOV && ' + ccov' || ''}}${{ matrix.env.IKFAST_TEST && ' + ikfast' || ''}}${{ matrix.env.CLANG_TIDY && (github.event_name != 'workflow_dispatch' && ' + clang-tidy (delta)' || ' + clang-tidy (all)') || '' }}
     runs-on: ubuntu-latest
@@ -153,19 +160,12 @@ jobs:
           sudo find ${{ env.BASEDIR }}/target_ws -wholename '*/test_results/*' -delete
           sudo rm -rf ${{ env.BASEDIR }}/target_ws/src
           du -sh ${{ env.BASEDIR }}/target_ws
-      - name: Generate documentation
-        # No need for doc generation in PRs, we only generate docs when we are building out of a branch (aka pushing, scheduled jobs, workflow dispatchs)
-        if: matrix.env.DOXYGEN && ${{ github.event_name != 'pull_request' }}
-        # Gen Docs using colcon
-        run: |
-          cd ${{ env.BASEDIR }}/target_ws && \
-          colcon build --event-handlers console_direct+ desktop_notification- status- terminal_title- --cmake-args -DENABLE_DOXYGEN=ON --cmake-target doxygen-docs --cmake-target-skip-unavailable
       - name: Deploy to pages
-        # TODO: Make this-> If Generate Documentation success
-        if: matrix.env.DOXYGEN && ${{ github.event_name != 'pull_request' }}
+        # TODO: Make this -> if Documentation generation is a success
+        # if: matrix.env.DOXYGEN && ${{ github.event_name != 'pull_request' }}
         uses: s0/git-publish-subdir-action@v2.5.0
         env:
           REPO: self
           BRANCH: api
-          FOLDER: build/moveit_core/html # Change this
+          FOLDER: ${{ env.BASEDIR }}/target_ws/build/moveit_core/html # Change this
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
