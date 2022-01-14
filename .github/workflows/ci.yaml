@@ -45,7 +45,7 @@ jobs:
         # Build documentation (TODO: Only if doxygen flag is here)
         set +u && \
         source /opt/ros/${{ matrix.env.ROS_DISTRO }}/setup.bash && \
-        cd ${{ env.BASEDIR }}/target_ws && \
+        cd /home/runner/work/moveit2/moveit2/.work/target_ws && \
         colcon build --event-handlers console_direct+ desktop_notification- status- terminal_title- --cmake-args -DENABLE_DOXYGEN=ON --cmake-target doxygen-docs --cmake-target-skip-unavailable
       # Changing linker to lld as ld has a behavior where it takes a long time to finish
       TARGET_CMAKE_ARGS: >
