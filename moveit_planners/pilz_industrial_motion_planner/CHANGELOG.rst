@@ -2,8 +2,8 @@
 Changelog for package pilz_industrial_motion_planner
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.3.3 (2022-01-20)
+------------------
 * Fix missing ament_cmake_gtest dependency (`#981 <https://github.com/vatanaksoytezer/moveit2/issues/981>`_) (`#987 <https://github.com/vatanaksoytezer/moveit2/issues/987>`_)
 * Remove some Maintainers from Pilz Planner (`#971 <https://github.com/vatanaksoytezer/moveit2/issues/971>`_) (`#974 <https://github.com/vatanaksoytezer/moveit2/issues/974>`_)
   (cherry picked from commit 79addb30a703f566f3d81b01dc4d34c0f8cce209)

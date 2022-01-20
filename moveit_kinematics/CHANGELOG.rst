@@ -2,8 +2,8 @@
 Changelog for package moveit_kinematics
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.3.3 (2022-01-20)
+------------------
 * Fix IKFast test dependency (`#993 <https://github.com/vatanaksoytezer/moveit2/issues/993>`_) (`#1002 <https://github.com/vatanaksoytezer/moveit2/issues/1002>`_)
   (cherry picked from commit d01ef481e2a65323842496f3732b0fa3bd03548b)
   Co-authored-by: Henning Kayser <henningkayser@picknik.ai>

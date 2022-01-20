@@ -2,8 +2,8 @@
 Changelog for package moveit_ros_perception
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.3.3 (2022-01-20)
+------------------
 * Fix boost linking errors for Windows (`#957 <https://github.com/vatanaksoytezer/moveit2/issues/957>`_) (`#1001 <https://github.com/vatanaksoytezer/moveit2/issues/1001>`_)
 * Contributors: mergify[bot]
 
