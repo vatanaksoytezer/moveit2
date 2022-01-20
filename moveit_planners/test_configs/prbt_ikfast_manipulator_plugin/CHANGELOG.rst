@@ -2,6 +2,12 @@
 Changelog for package moveit_resources_prbt_ikfast_manipulator_plugin
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Replace NULL with nullptr (`#961 <https://github.com/vatanaksoytezer/moveit2/issues/961>`_)
+  * Fixes `#841 <https://github.com/vatanaksoytezer/moveit2/issues/841>`_
+* Contributors: Stephanie Eng
+
 2.3.2 (2021-12-29)
 ------------------
 

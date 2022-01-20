@@ -2,6 +2,12 @@
 Changelog for package pilz_industrial_motion_planner_testutils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Remove some Maintainers from Pilz Planner (`#971 <https://github.com/vatanaksoytezer/moveit2/issues/971>`_)
+* Remove '-W*' options from cmake files (`#2903 <https://github.com/vatanaksoytezer/moveit2/issues/2903>`_)
+* Contributors: Leroy Rügemer, jschleicher
+
 2.3.2 (2021-12-29)
 ------------------
 
