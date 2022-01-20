@@ -2,6 +2,11 @@
 Changelog for package moveit_ros_occupancy_map_monitor
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fix boost linking errors for Windows (`#957 <https://github.com/vatanaksoytezer/moveit2/issues/957>`_) (`#1001 <https://github.com/vatanaksoytezer/moveit2/issues/1001>`_)
+* Contributors: mergify[bot]
+
 2.3.2 (2021-12-29)
 ------------------
 
