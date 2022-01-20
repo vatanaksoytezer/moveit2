@@ -2,8 +2,8 @@
 Changelog for package pilz_industrial_motion_planner
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.4.0 (2022-01-20)
+------------------
 * Remove 'using namespace' from header files. (`#994 <https://github.com/vatanaksoytezer/moveit2/issues/994>`_)
 * Fix missing ament_cmake_gtest dependency (`#981 <https://github.com/vatanaksoytezer/moveit2/issues/981>`_)
 * Remove some Maintainers from Pilz Planner (`#971 <https://github.com/vatanaksoytezer/moveit2/issues/971>`_)

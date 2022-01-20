@@ -2,8 +2,8 @@
 Changelog for package moveit_kinematics
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.4.0 (2022-01-20)
+------------------
 * Fix IKFast test dependency (`#993 <https://github.com/vatanaksoytezer/moveit2/issues/993>`_)
 * Replace NULL with nullptr (`#961 <https://github.com/vatanaksoytezer/moveit2/issues/961>`_)
   * Fixes `#841 <https://github.com/vatanaksoytezer/moveit2/issues/841>`_

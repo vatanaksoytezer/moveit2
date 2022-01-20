@@ -2,8 +2,8 @@
 Changelog for package moveit_setup_assistant
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.4.0 (2022-01-20)
+------------------
 * Replace NULL with nullptr (`#961 <https://github.com/vatanaksoytezer/moveit2/issues/961>`_)
   * Fixes `#841 <https://github.com/vatanaksoytezer/moveit2/issues/841>`_
 * Merge https://github.com/ros-planning/moveit/commit/a0ee2020c4a40d03a48044d71753ed23853a665d

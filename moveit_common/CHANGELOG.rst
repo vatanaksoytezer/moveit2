@@ -2,8 +2,8 @@
 Changelog for package moveit_common
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.4.0 (2022-01-20)
+------------------
 * Merge https://github.com/ros-planning/moveit/commit/f3ac6070497da90da33551fc1dc3a68938340413
 * Contributors: Abishalini
 

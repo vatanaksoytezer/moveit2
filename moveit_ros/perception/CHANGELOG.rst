@@ -2,8 +2,8 @@
 Changelog for package moveit_ros_perception
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.4.0 (2022-01-20)
+------------------
 * Fix boost linking errors for Windows (`#957 <https://github.com/vatanaksoytezer/moveit2/issues/957>`_)
 * moveit_build_options()
   Declare common build options like CMAKE_CXX_STANDARD, CMAKE_BUILD_TYPE,

@@ -2,8 +2,8 @@
 Changelog for package moveit_ros_planning
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.4.0 (2022-01-20)
+------------------
 * Merge https://github.com/ros-planning/moveit/commit/f3ac6070497da90da33551fc1dc3a68938340413
 * Replace NULL with nullptr (`#961 <https://github.com/vatanaksoytezer/moveit2/issues/961>`_)
   * Fixes `#841 <https://github.com/vatanaksoytezer/moveit2/issues/841>`_

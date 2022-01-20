@@ -2,8 +2,8 @@
 Changelog for package moveit_hybrid_planning
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.4.0 (2022-01-20)
+------------------
 * hybrid_planning: Fix global_planner action name (`#960 <https://github.com/vatanaksoytezer/moveit2/issues/960>`_)
 * Put hybrid planning actions under a common namespace (`#932 <https://github.com/vatanaksoytezer/moveit2/issues/932>`_)
   * Put hybrid planning actions under a common namespace

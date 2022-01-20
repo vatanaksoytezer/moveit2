@@ -2,8 +2,8 @@
 Changelog for package moveit_servo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.4.0 (2022-01-20)
+------------------
 * Remove 'using namespace' from header files. (`#994 <https://github.com/vatanaksoytezer/moveit2/issues/994>`_)
 * Servo: re-order velocity limit check & minor cleanup (`#956 <https://github.com/vatanaksoytezer/moveit2/issues/956>`_)
 * moveit_build_options()

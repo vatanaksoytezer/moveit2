@@ -2,8 +2,8 @@
 Changelog for package moveit_core
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.4.0 (2022-01-20)
+------------------
 * Move background_processing (`#997 <https://github.com/vatanaksoytezer/moveit2/issues/997>`_)
 * Fix boost linking errors for Windows (`#957 <https://github.com/vatanaksoytezer/moveit2/issues/957>`_)
 * Delete backtrace hack (`#995 <https://github.com/vatanaksoytezer/moveit2/issues/995>`_)
