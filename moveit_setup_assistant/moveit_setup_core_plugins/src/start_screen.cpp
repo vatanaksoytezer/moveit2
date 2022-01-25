@@ -48,8 +48,18 @@ void StartScreen::onInit()
 void StartScreen::loadURDFFile(const std::string& urdf_file_path, const std::string& xacro_args)
 {
   urdf_config_->loadFromPath(urdf_file_path, xacro_args);
+}
+
+void StartScreen::setSRDFFile(const std::string& srdf_string)
+{
+  // srdf_config_->loadSRDFString(srdf_string);
   srdf_config_->updateRobotModel();
 }
+
+// std::string StartScreen::getURDFName()
+// {
+//   return urdf_config_->getName();
+// }
 
 std::string StartScreen::getURDFPath()
 {
