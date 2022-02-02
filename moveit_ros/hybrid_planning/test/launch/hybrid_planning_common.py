@@ -141,6 +141,29 @@ def generate_common_hybrid_launch_description():
                     hybrid_planning_manager_param,
                 ],
             ),
+            ComposableNode(
+                package="tf2_ros",
+                executable="static_transform_publisher",
+                name="static_transform_publisher",
+                output="log",
+                arguments=[
+                    "0.0",
+                    "0.0",
+                    "0.0",
+                    "0.0",
+                    "0.0",
+                    "0.0",
+                    "world",
+                    "panda_link0",
+                ],
+            ),
+            ComposableNode(
+                package="robot_state_publisher",
+                executable="robot_state_publisher",
+                name="robot_state_publisher",
+                output="both",
+                parameters=[robot_description],
+            ),
         ],
         output="screen",
     )
@@ -157,24 +180,6 @@ def generate_common_hybrid_launch_description():
         output="log",
         arguments=["-d", rviz_config_file],
         parameters=[robot_description, robot_description_semantic],
-    )
-
-    # Static TF
-    static_tf = Node(
-        package="tf2_ros",
-        executable="static_transform_publisher",
-        name="static_transform_publisher",
-        output="log",
-        arguments=["0.0", "0.0", "0.0", "0.0", "0.0", "0.0", "world", "panda_link0"],
-    )
-
-    # Publish TF
-    robot_state_publisher = Node(
-        package="robot_state_publisher",
-        executable="robot_state_publisher",
-        name="robot_state_publisher",
-        output="both",
-        parameters=[robot_description],
     )
 
     # ros2_control using FakeSystem as hardware
@@ -209,9 +214,7 @@ def generate_common_hybrid_launch_description():
 
     launched_nodes = [
         container,
-        static_tf,
-        rviz_node,
-        robot_state_publisher,
+        # rviz_node,
         ros2_control_node,
     ] + load_controllers
 
