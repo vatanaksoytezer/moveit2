@@ -180,9 +180,7 @@ jobs:
         with:
           github-token: ${{ secrets.DELETE_PACKAGES_TOKEN }}
           script: |
-            const response = await github.request("GET /orgs/${{ env.OWNER }}/packages/container/${{ env.PACKAGE_NAME }}", {
-              accept: 'application/vnd.github.v3+json'
-            });
+            const response = await github.request("GET /orgs/${{ env.OWNER }}/packages/container/${{ env.PACKAGE_NAME }}");
             for(version of response.data) {
                 if (version.metadata.container.tags.length == 0) {
                     console.log("delete " + version.id)
