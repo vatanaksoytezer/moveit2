@@ -171,9 +171,9 @@ jobs:
 
   delete_untagged:
     runs-on: ubuntu-latest
-    needs:
-      - release
-      - source
+    # needs:
+    #   - release
+    #   - source
     steps:
       - name: Delete Untagged Images
         uses: actions/github-script@v3
