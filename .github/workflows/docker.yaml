@@ -174,23 +174,34 @@ jobs:
     # needs:
     #   - release
     #   - source
-    steps:
-      - name: Delete Untagged Images
-        uses: actions/github-script@v3
-        with:
-          github-token: ${{ secrets.DELETE_PACKAGES_TOKEN }}
-          script: |
-            const response = await github.request("GET /${{ env.OWNER }}/${{ env.PACKAGE_NAME }}/pkgs/container/${{ env.PACKAGE_NAME }}/versions",
-              { per_page: ${{ env.PER_PAGE }}
-            });
-            for(version of response.data) {
-                if (version.metadata.container.tags.length == 0) {
-                    console.log("delete " + version.id)
-                    const deleteResponse = await github.request("DELETE /${{ env.OWNER }}/${{ env.PACKAGE_NAME }}/pkgs/container/${{ env.PACKAGE_NAME }}/versions/" + version.id, { });
-                    console.log("status " + deleteResponse.status)
-                }
-            }
-        env:
-          OWNER: vatanaksoytezer
-          PACKAGE_NAME: moveit2
-          PER_PAGE: 1000
+    # steps:
+    #   - name: Delete Untagged Images
+    #     uses: actions/github-script@v3
+    #     with:
+    #       github-token: ${{ secrets.DELETE_PACKAGES_TOKEN }}
+    #       script: |
+    #         const response = await github.request("GET /${{ env.OWNER }}/${{ env.PACKAGE_NAME }}/pkgs/container/${{ env.PACKAGE_NAME }}/versions",
+    #           { per_page: ${{ env.PER_PAGE }}
+    #         });
+    #         for(version of response.data) {
+    #             if (version.metadata.container.tags.length == 0) {
+    #                 console.log("delete " + version.id)
+    #                 const deleteResponse = await github.request("DELETE /${{ env.OWNER }}/${{ env.PACKAGE_NAME }}/pkgs/container/${{ env.PACKAGE_NAME }}/versions/" + version.id, { });
+    #                 console.log("status " + deleteResponse.status)
+    #             }
+    #         }
+    #     env:
+    #       OWNER: vatanaksoytezer
+    #       PACKAGE_NAME: moveit2
+    #       PER_PAGE: 1000
+steps:
+  - name: Prune
+    uses: vlaurin/action-ghcr-prune@main
+    with:
+      token: ${{ secrets.DELETE_PACKAGES_TOKEN }}
+      organization: vatanaksoytezer
+      container: moveit2
+      dry-run: true # Dry-run first, then change to `false`
+      older-than: 7 # days
+      keep-last: 0
+      untagged: true
