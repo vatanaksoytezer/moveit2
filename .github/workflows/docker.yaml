@@ -194,14 +194,14 @@ jobs:
     #       OWNER: vatanaksoytezer
     #       PACKAGE_NAME: moveit2
     #       PER_PAGE: 1000
-steps:
-  - name: Prune
-    uses: vlaurin/action-ghcr-prune@main
-    with:
-      token: ${{ secrets.DELETE_PACKAGES_TOKEN }}
-      organization: vatanaksoytezer
-      container: moveit2
-      dry-run: true # Dry-run first, then change to `false`
-      older-than: 7 # days
-      keep-last: 0
-      untagged: true
+  steps:
+    - name: Prune
+      uses: vlaurin/action-ghcr-prune@main
+      with:
+        token: ${{ secrets.DELETE_PACKAGES_TOKEN }}
+        organization: vatanaksoytezer
+        container: moveit2
+        dry-run: true # Dry-run first, then change to `false`
+        older-than: 7 # days
+        keep-last: 0
+        untagged: true
