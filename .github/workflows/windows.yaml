@@ -5,7 +5,7 @@ on:
   pull_request:
   push:
     branches:
-      - mainS
+      - main
       - vatan/windows_ci
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
       - uses: ros-tooling/setup-ros@v0.3
         with:
           required-ros-distributions: ${{ matrix.env.ROS_DISTRO }}
-      - uses: ros-tooling/action-ros-ci@v0.2
+      - uses: vatanaksoytezer/action-ros-ci@vatan/windows
         with:
           target-ros2-distro: ${{ matrix.env.ROS_DISTRO }}
           vcs-repo-file-url: moveit2.repos
