@@ -1,0 +1,36 @@
+name: Windows CI
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - mainS
+      - vatan/windows_ci
+
+jobs:
+  default:
+    strategy:
+      fail-fast: false
+      matrix:
+        env:
+          - ROS_DISTRO: rolling
+          - ROS_DISTRO: humble
+
+    name: ${{ matrix.env.ROS_DISTRO }}-windows
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ros-tooling/setup-ros@v0.3
+        with:
+          required-ros-distributions: ${{ matrix.env.ROS_DISTRO }}
+      - uses: ros-tooling/action-ros-ci@v0.2
+        with:
+          target-ros2-distro: ${{ matrix.env.ROS_DISTRO }}
+          vcs-repo-file-url: moveit2.repos
+          colcon-defaults: |
+            {
+              "build": {
+                "mixin": ["release"]
+              }
+            }
