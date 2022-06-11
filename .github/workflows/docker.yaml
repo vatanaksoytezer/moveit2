@@ -51,7 +51,7 @@ jobs:
         with:
           file: .docker/${{ github.job }}/Dockerfile
           build-args: ROS_DISTRO=${{ matrix.ROS_DISTRO }}
-          push: $ {{ (github.event_name != 'pull_request') && (github.repository == 'ros-planning/moveit2') }}
+          push: ${{ (github.event_name != 'pull_request') && (github.repository == 'ros-planning/moveit2') }}
           no-cache: true
           tags: |
             ${{ env.GH_IMAGE }}
