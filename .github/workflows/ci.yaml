@@ -134,7 +134,7 @@ jobs:
         uses: ros-industrial/industrial_ci@master
         env: ${{ matrix.env }}
       - name: Push result to Testspace
-        if: always()
+        if: always() && (github.repository == 'ros-planning/moveit2')
         run: |
           testspace "[ ${{ matrix.env.IMAGE }} ]${{ env.BASEDIR }}/target_ws/**/test_results/**/*.xml"
       - name: Upload test artifacts (on failure)

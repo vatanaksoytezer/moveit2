@@ -8,6 +8,13 @@ on:
   push:
     branches:
       - main
+    paths:
+      - .docker/**
+      - .github/workflows/docker.yaml
+  pull_request:
+    paths:
+      - .docker/**
+      - .github/workflows/docker.yaml
 
 jobs:
   release:
@@ -42,7 +49,7 @@ jobs:
         with:
           file: .docker/${{ github.job }}/Dockerfile
           build-args: ROS_DISTRO=${{ matrix.ROS_DISTRO }}
-          push: true
+          push: (github.event_name != 'pull_request') && (github.repository == 'ros-planning/moveit2')
           no-cache: true
           tags: |
             ${{ env.GH_IMAGE }}
@@ -80,7 +87,7 @@ jobs:
         with:
           file: .docker/${{ github.job }}/Dockerfile
           build-args: ROS_DISTRO=${{ matrix.ROS_DISTRO }}
-          push: true
+          push: (github.event_name != 'pull_request') && (github.repository == 'ros-planning/moveit2')
           no-cache: true
           tags: |
             ${{ env.GH_IMAGE }}
@@ -119,7 +126,7 @@ jobs:
         with:
           file: .docker/${{ github.job }}/Dockerfile
           build-args: ROS_DISTRO=${{ matrix.ROS_DISTRO }}
-          push: true
+          push: (github.event_name != 'pull_request') && (github.repository == 'ros-planning/moveit2')
           no-cache: true
           tags: |
             ${{ env.GH_IMAGE }}
@@ -162,7 +169,7 @@ jobs:
           context: .
           file: .docker/${{ github.job }}/Dockerfile
           build-args: ROS_DISTRO=${{ matrix.ROS_DISTRO }}
-          push: true
+          push: (github.event_name != 'pull_request') && (github.repository == 'ros-planning/moveit2')
           no-cache: true
           tags: |
             ${{ env.GH_IMAGE }}
@@ -175,6 +182,7 @@ jobs:
       - source
     steps:
       - name: Delete Untagged Images
+        if: (github.event_name != 'pull_request') && (github.repository == 'ros-planning/moveit2')
         uses: actions/github-script@v5
         with:
           github-token: ${{ secrets.DELETE_PACKAGES_TOKEN }}
