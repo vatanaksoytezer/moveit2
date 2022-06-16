@@ -20,6 +20,7 @@
   <!--
   <exec_depend>moveit_ros_perception</exec_depend>
   -->
+  <depend>moveit_common</depend>
   <depend>rclcpp</depend>
   <depend>rclcpp_lifecycle</depend>
   <!--
