@@ -7,6 +7,7 @@ moveit_package()
 
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(moveit_node_interface REQUIRED)
 find_package(eigen3_cmake_module REQUIRED)
 find_package(Eigen3 REQUIRED)
 
@@ -134,6 +135,7 @@ set(THIS_PACKAGE_INCLUDE_DEPENDS
   OCTOMAP
   Bullet
   ruckig
+  moveit_node_interface
 )
 
 include_directories(SYSTEM ${EIGEN3_INCLUDE_DIRS}

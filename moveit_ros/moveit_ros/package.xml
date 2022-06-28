@@ -22,9 +22,6 @@
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <!--
-  <exec_depend>moveit_ros_perception</exec_depend>
-  -->
   <exec_depend>moveit_ros_planning</exec_depend>
   <exec_depend>moveit_ros_warehouse</exec_depend>
   <exec_depend>moveit_ros_benchmarks</exec_depend>

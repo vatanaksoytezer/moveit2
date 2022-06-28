@@ -52,12 +52,13 @@ namespace kinematics_plugin_loader
 rclcpp::Logger LOGGER = rclcpp::get_logger("kinematics_plugin_loader");
 
 template <rclcpp::ParameterType ParamType>
-rclcpp::Parameter declare_parameter(const rclcpp::Node::SharedPtr& node, const std::string& parameter_name)
+rclcpp::Parameter declare_parameter(const moveit::node_interface::NodeInterfaceSharedPtr& node_interface,
+                                    const std::string& parameter_name)
 {
-  if (!node->has_parameter(parameter_name))
-    node->declare_parameter(parameter_name, ParamType);
+  if (!node_interface->get_node_parameters_interface()->has_parameter(parameter_name))
+    node_interface->get_node_parameters_interface()->declare_parameter(parameter_name, ParamType);
   rclcpp::Parameter parameter;
-  if (!node->get_parameter(parameter_name, parameter))
+  if (!node_interface->get_node_parameters_interface()->get_parameter(parameter_name, parameter))
     RCLCPP_DEBUG_STREAM(LOGGER, "Parameter `" << parameter_name << "` doesn't exists");
   return parameter;
 }
@@ -71,11 +72,12 @@ public:
    * \param search_res
    * \param iksolver_to_tip_links - a map between each ik solver and a vector of custom-specified tip link(s)
    */
-  KinematicsLoaderImpl(const rclcpp::Node::SharedPtr& node, const std::string& robot_description,
+  KinematicsLoaderImpl(moveit::node_interface::NodeInterfaceSharedPtr node_interface,
+                       const std::string& robot_description,
                        const std::map<std::string, std::vector<std::string>>& possible_kinematics_solvers,
                        const std::map<std::string, std::vector<double>>& search_res,
                        const std::map<std::string, std::vector<std::string>>& iksolver_to_tip_links)
-    : node_(node)
+    : node_interface_(node_interface)
     , robot_description_(robot_description)
     , possible_kinematics_solvers_(possible_kinematics_solvers)
     , search_res_(search_res)
@@ -190,7 +192,7 @@ public:
           // choose search resolution
           double search_res = search_res_.find(jmg->getName())->second[i];  // we know this exists, by construction
 
-          if (!result->initialize(node_, jmg->getParentModel(), jmg->getName(),
+          if (!result->initialize(node_interface_, jmg->getParentModel(), jmg->getName(),
                                   (base.empty() || base[0] != '/') ? base : base.substr(1), tips, search_res))
           {
             RCLCPP_ERROR(LOGGER, "Kinematics solver of type '%s' could not be initialized for group '%s'",
@@ -250,7 +252,7 @@ public:
   }
 
 private:
-  const rclcpp::Node::SharedPtr node_;
+  moveit::node_interface::NodeInterfaceSharedPtr node_interface_;
   std::string robot_description_;
   std::map<std::string, std::vector<std::string>> possible_kinematics_solvers_;
   std::map<std::string, std::vector<double>> search_res_;
@@ -277,7 +279,7 @@ moveit::core::SolverAllocatorFn KinematicsPluginLoader::getLoaderFunction()
       return loader.allocKinematicsSolverWithCache(jmg);
     };
 
-  rdf_loader::RDFLoader rml(node_, robot_description_);
+  rdf_loader::RDFLoader rml(node_interface_, robot_description_);
   robot_description_ = rml.getRobotDescription();
   return getLoaderFunction(rml.getSRDF());
 }
@@ -309,13 +311,14 @@ moveit::core::SolverAllocatorFn KinematicsPluginLoader::getLoaderFunction(const 
           std::string ksolver_param_name = base_param_name + ".kinematics_solver";
           RCLCPP_DEBUG(LOGGER, "Looking for param %s ", ksolver_param_name.c_str());
           rclcpp::Parameter ksolver_param =
-              declare_parameter<rclcpp::ParameterType::PARAMETER_STRING>(node_, ksolver_param_name);
+              declare_parameter<rclcpp::ParameterType::PARAMETER_STRING>(node_interface_, ksolver_param_name);
           if (ksolver_param.get_type() == rclcpp::ParameterType::PARAMETER_NOT_SET)
           {
             base_param_name = robot_description_ + "_kinematics." + known_group.name_;
             ksolver_param_name = base_param_name + ".kinematics_solver";
             RCLCPP_DEBUG(LOGGER, "Looking for param %s ", ksolver_param_name.c_str());
-            ksolver_param = declare_parameter<rclcpp::ParameterType::PARAMETER_STRING>(node_, ksolver_param_name);
+            ksolver_param =
+                declare_parameter<rclcpp::ParameterType::PARAMETER_STRING>(node_interface_, ksolver_param_name);
           }
           if (ksolver_param.get_type() != rclcpp::ParameterType::PARAMETER_NOT_SET)
           {
@@ -341,7 +344,7 @@ moveit::core::SolverAllocatorFn KinematicsPluginLoader::getLoaderFunction(const 
 
           std::string ksolver_timeout_param_name = base_param_name + ".kinematics_solver_timeout";
           rclcpp::Parameter ksolver_timeout_param =
-              declare_parameter<rclcpp::ParameterType::PARAMETER_DOUBLE>(node_, ksolver_timeout_param_name);
+              declare_parameter<rclcpp::ParameterType::PARAMETER_DOUBLE>(node_interface_, ksolver_timeout_param_name);
           if (ksolver_timeout_param.get_type() != rclcpp::ParameterType::PARAMETER_NOT_SET)
           {
             if (ksolver_timeout_param.get_type() == rclcpp::ParameterType::PARAMETER_DOUBLE)
@@ -356,7 +359,7 @@ moveit::core::SolverAllocatorFn KinematicsPluginLoader::getLoaderFunction(const 
 
           std::string ksolver_res_param_name = base_param_name + ".kinematics_solver_search_resolution";
           rclcpp::Parameter ksolver_res_param =
-              declare_parameter<rclcpp::ParameterType::PARAMETER_DOUBLE>(node_, ksolver_res_param_name);
+              declare_parameter<rclcpp::ParameterType::PARAMETER_DOUBLE>(node_interface_, ksolver_res_param_name);
           if (ksolver_res_param.get_type() != rclcpp::ParameterType::PARAMETER_NOT_SET)
           {
             if (ksolver_res_param.get_type() == rclcpp::ParameterType::PARAMETER_STRING)
@@ -383,8 +386,8 @@ moveit::core::SolverAllocatorFn KinematicsPluginLoader::getLoaderFunction(const 
 
           // Allow a kinematic solver's tip links to be specified on the rosparam server as an array
           std::string ksolver_ik_links_param_name = base_param_name + ".kinematics_solver_ik_links";
-          rclcpp::Parameter ksolver_ik_links_param =
-              declare_parameter<rclcpp::ParameterType::PARAMETER_STRING_ARRAY>(node_, ksolver_ik_links_param_name);
+          rclcpp::Parameter ksolver_ik_links_param = declare_parameter<rclcpp::ParameterType::PARAMETER_STRING_ARRAY>(
+              node_interface_, ksolver_ik_links_param_name);
           if (ksolver_ik_links_param.get_type() != rclcpp::ParameterType::PARAMETER_NOT_SET)
           {
             if (ksolver_ik_links_param.get_type() == rclcpp::ParameterType::PARAMETER_STRING_ARRAY)
@@ -422,8 +425,8 @@ moveit::core::SolverAllocatorFn KinematicsPluginLoader::getLoaderFunction(const 
       }
     }
 
-    loader_ = std::make_shared<KinematicsLoaderImpl>(node_, robot_description_, possible_kinematics_solvers, search_res,
-                                                     iksolver_to_tip_links);
+    loader_ = std::make_shared<KinematicsLoaderImpl>(node_interface_, robot_description_, possible_kinematics_solvers,
+                                                     search_res, iksolver_to_tip_links);
   }
 
   return [&loader = *loader_](const moveit::core::JointModelGroup* jmg) {

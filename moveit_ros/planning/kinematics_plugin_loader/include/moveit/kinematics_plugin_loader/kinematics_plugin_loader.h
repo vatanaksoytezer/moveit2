@@ -39,6 +39,7 @@
 #include <moveit/macros/class_forward.h>
 #include <moveit/robot_model/robot_model.h>
 #include <moveit/kinematics_base/kinematics_base.h>
+#include <moveit_node_interface/moveit_node_interface.hpp>
 
 namespace kinematics_plugin_loader
 {
@@ -56,7 +57,19 @@ public:
   KinematicsPluginLoader(const rclcpp::Node::SharedPtr& node,
                          const std::string& robot_description = "robot_description",
                          double default_search_resolution = 0.0)
-    : node_(node), robot_description_(robot_description), default_search_resolution_(default_search_resolution)
+    : node_interface_(
+          std::make_shared<moveit::node_interface::NodeInterface>(moveit::node_interface::NodeInterface(node)))
+    , robot_description_(robot_description)
+    , default_search_resolution_(default_search_resolution)
+  {
+  }
+
+  KinematicsPluginLoader(moveit::node_interface::NodeInterfaceSharedPtr& node_interface,
+                         const std::string& robot_description = "robot_description",
+                         double default_search_resolution = 0.0)
+    : node_interface_(node_interface)
+    , robot_description_(robot_description)
+    , default_search_resolution_(default_search_resolution)
   {
   }
 
@@ -67,10 +80,30 @@ public:
       parameter under which the robot description can be found. This
       is passed to the kinematics solver initialization as well as
       used to read the SRDF document when needed. */
+  KinematicsPluginLoader(moveit::node_interface::NodeInterfaceSharedPtr& node_interface,
+                         const std::string& solver_plugin, double solve_timeout,
+                         const std::string& robot_description = "robot_description",
+                         double default_search_resolution = 0.0)
+    : node_interface_(node_interface)
+    , robot_description_(robot_description)
+    , default_search_resolution_(default_search_resolution)
+    , default_solver_plugin_(solver_plugin)
+    , default_solver_timeout_(solve_timeout)
+  {
+  }
+
+  /** \brief Use a default kinematics solver (\e solver_plugin) for
+      all the groups in the robot model. The default timeout for the
+      solver is \e solve_timeout and the default number of IK attempts
+      is \e ik_attempts. Takes a moveit node interface argument and the name of the ROS
+      parameter under which the robot description can be found as an optional argument. This
+      is passed to the kinematics solver initialization as well as
+      used to read the SRDF document when needed. */
   KinematicsPluginLoader(const rclcpp::Node::SharedPtr& node, const std::string& solver_plugin, double solve_timeout,
                          const std::string& robot_description = "robot_description",
                          double default_search_resolution = 0.0)
-    : node_(node)
+    : node_interface_(
+          std::make_shared<moveit::node_interface::NodeInterface>(moveit::node_interface::NodeInterface(node)))
     , robot_description_(robot_description)
     , default_search_resolution_(default_search_resolution)
     , default_solver_plugin_(solver_plugin)
@@ -101,7 +134,7 @@ public:
   void status() const;
 
 private:
-  const rclcpp::Node::SharedPtr node_;
+  moveit::node_interface::NodeInterfaceSharedPtr node_interface_;
   std::string robot_description_;
   double default_search_resolution_;
 

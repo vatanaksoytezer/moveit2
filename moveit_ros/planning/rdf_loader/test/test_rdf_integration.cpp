@@ -36,6 +36,7 @@
 
 #include <moveit/rdf_loader/rdf_loader.h>
 #include <rclcpp/rclcpp.hpp>
+#include <rclcpp_lifecycle/lifecycle_node.hpp>
 #include <gtest/gtest.h>
 
 TEST(RDFIntegration, default_arguments)
@@ -56,10 +57,32 @@ TEST(RDFIntegration, non_existent)
   ASSERT_EQ(nullptr, loader.getSRDF());
 }
 
+TEST(RDFIntegration, non_existent_life_cycle)
+{
+  auto test_node = std::make_shared<rclcpp_lifecycle::LifecycleNode>("non_existent");
+  auto node_interface =
+      std::make_shared<moveit::node_interface::NodeInterface>(moveit::node_interface::NodeInterface(test_node));
+  rdf_loader::RDFLoader loader(node_interface, "does_not_exist");
+  ASSERT_EQ(nullptr, loader.getURDF());
+  ASSERT_EQ(nullptr, loader.getSRDF());
+}
+
 TEST(RDFIntegration, topic_based)
 {
   rclcpp::Node::SharedPtr node = std::make_shared<rclcpp::Node>("topic_based");
   rdf_loader::RDFLoader loader(node, "topic_description");
+  ASSERT_NE(nullptr, loader.getURDF());
+  EXPECT_EQ("gonzo", loader.getURDF()->name_);
+  ASSERT_NE(nullptr, loader.getSRDF());
+  EXPECT_EQ("gonzo", loader.getSRDF()->getName());
+}
+
+TEST(RDFIntegration, topic_based_life_cycle)
+{
+  auto test_node = std::make_shared<rclcpp_lifecycle::LifecycleNode>("topic_based");
+  auto node_interface =
+      std::make_shared<moveit::node_interface::NodeInterface>(moveit::node_interface::NodeInterface(test_node));
+  rdf_loader::RDFLoader loader(node_interface, "topic_description");
   ASSERT_NE(nullptr, loader.getURDF());
   EXPECT_EQ("gonzo", loader.getURDF()->name_);
   ASSERT_NE(nullptr, loader.getSRDF());
@@ -82,6 +105,39 @@ TEST(RDFIntegration, executor)
   rdf_loader::RDFLoader loader(node, "topic_description");
 
   // THEN the RDFLoader should return non-null values for the URDF and SRDF model.
+  ASSERT_NE(nullptr, loader.getURDF());
+  EXPECT_EQ("gonzo", loader.getURDF()->name_);
+  ASSERT_NE(nullptr, loader.getSRDF());
+  EXPECT_EQ("gonzo", loader.getSRDF()->getName());
+  executor.cancel();
+  spinning_thread.join();
+}
+
+TEST(RDFIntegration, executor_life_cycle)
+{
+  // RDFLoader should successfully load URDF and SRDF strings from a ROS topic
+  // when the node that is passed to it is spinning.
+
+  // GIVEN a node that has been added to an executor that is spinning on another thread
+  auto test_node = std::make_shared<rclcpp_lifecycle::LifecycleNode>("executor");
+  test_node->configure();
+  test_node->activate();
+
+  // Create a thread to spin an Executor.
+  rclcpp::executors::SingleThreadedExecutor executor;
+
+  // add callback group from lifecycle node and its node interface to executor
+  auto group = test_node->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, true);
+  executor.add_callback_group(group, test_node->get_node_base_interface());
+  std::thread spinning_thread([&executor] { executor.spin(); });
+
+  // WHEN the RDFLoader is created
+  auto node_interface =
+      std::make_shared<moveit::node_interface::NodeInterface>(moveit::node_interface::NodeInterface(test_node));
+  rdf_loader::RDFLoader loader(node_interface, "topic_description");
+
+  // THEN the RDFLoader should return non-null values for the URDF and SRDF
+  // model.
   ASSERT_NE(nullptr, loader.getURDF());
   EXPECT_EQ("gonzo", loader.getURDF()->name_);
   ASSERT_NE(nullptr, loader.getSRDF());

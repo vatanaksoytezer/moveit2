@@ -39,6 +39,7 @@
 #include <geometry_msgs/msg/pose.hpp>
 #include <moveit_msgs/msg/move_it_error_codes.hpp>
 #include <moveit/macros/class_forward.h>
+#include "node_interface/node_interface.h"
 #include <rclcpp/logging.hpp>
 #include <rclcpp/node.hpp>
 #include <string>
@@ -348,6 +349,7 @@ public:
 
   /**
    * @brief  Initialization function for the kinematics, for use with kinematic chain IK solvers
+   * @param node Shared ptr to a node used by the IK plugin
    * @param robot_model - allow the URDF to be loaded much quicker by passing in a pre-parsed model of the robot
    * @param group_name The group for which this solver is being configured
    * @param base_frame The base frame in which all input poses are expected.
@@ -362,6 +364,25 @@ public:
   virtual bool initialize(const rclcpp::Node::SharedPtr& node, const moveit::core::RobotModel& robot_model,
                           const std::string& group_name, const std::string& base_frame,
                           const std::vector<std::string>& tip_frames, double search_discretization);
+
+  /**
+   * @brief  Initialization function for the kinematics, for use with kinematic chain IK solvers
+   * @param node Shared ptr to a moveit node interface used by the IK plugin
+   * @param robot_model - allow the URDF to be loaded much quicker by passing in a pre-parsed model of the robot
+   * @param group_name The group for which this solver is being configured
+   * @param base_frame The base frame in which all input poses are expected.
+   * This may (or may not) be the root frame of the chain that the solver operates on
+   * @param tip_frames The tip of the chain
+   * @param search_discretization The discretization of the search when the solver steps through the redundancy
+   * @return true if initialization was successful, false otherwise
+   *
+   * Default implementation returns false and issues a warning to implement this new API.
+   * TODO: Make this method purely virtual after some soaking time, replacing the fallback.
+   */
+  virtual bool initialize(const moveit::node_interface::NodeInterfaceSharedPtr& node_interface,
+                          const moveit::core::RobotModel& robot_model, const std::string& group_name,
+                          const std::string& base_frame, const std::vector<std::string>& tip_frames,
+                          double search_discretization);
 
   /**
    * @brief  Return the name of the group that the solver is operating on

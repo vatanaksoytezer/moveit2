@@ -4,10 +4,12 @@ add_library(${MOVEIT_LIB_NAME} SHARED src/rdf_loader.cpp src/synchronized_string
 set_target_properties(${MOVEIT_LIB_NAME} PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
 ament_target_dependencies(${MOVEIT_LIB_NAME}
       rclcpp
+      rclcpp_lifecycle
       ament_index_cpp
       urdf
       srdfdom
-      moveit_core)
+      moveit_core
+      moveit_node_interface)
 
 install(DIRECTORY include/ DESTINATION include)
 install(DIRECTORY

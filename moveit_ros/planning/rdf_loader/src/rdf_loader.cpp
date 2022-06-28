@@ -57,19 +57,21 @@ namespace rdf_loader
 {
 static const rclcpp::Logger LOGGER = rclcpp::get_logger("moveit_rdf_loader.rdf_loader");
 
-RDFLoader::RDFLoader(const std::shared_ptr<rclcpp::Node>& node, const std::string& ros_name,
-                     bool default_continuous_value, double default_timeout)
-  : ros_name_(ros_name)
+void RDFLoader::loadRobot(moveit::node_interface::NodeInterfaceSharedPtr& node_interface, const std::string& ros_name,
+                          bool default_continuous_value, double default_timeout)
 {
-  auto start = node->now();
+  rclcpp::Clock clock;
+  auto start = clock.now();
 
   urdf_string_ = urdf_ssp_.loadInitialValue(
-      node, ros_name, [this](const std::string& new_urdf_string) { return urdfUpdateCallback(new_urdf_string); },
+      node_interface, ros_name,
+      [this](const std::string& new_urdf_string) { return urdfUpdateCallback(new_urdf_string); },
       default_continuous_value, default_timeout);
 
   const std::string srdf_name = ros_name + "_semantic";
   srdf_string_ = srdf_ssp_.loadInitialValue(
-      node, srdf_name, [this](const std::string& new_srdf_string) { return srdfUpdateCallback(new_srdf_string); },
+      node_interface, srdf_name,
+      [this](const std::string& new_srdf_string) { return srdfUpdateCallback(new_srdf_string); },
       default_continuous_value, default_timeout);
 
   if (!loadFromStrings())
@@ -77,7 +79,22 @@ RDFLoader::RDFLoader(const std::shared_ptr<rclcpp::Node>& node, const std::strin
     return;
   }
 
-  RCLCPP_INFO_STREAM(LOGGER, "Loaded robot model in " << (node->now() - start).seconds() << " seconds");
+  RCLCPP_INFO_STREAM(LOGGER, "Loaded robot model in " << (clock.now() - start).seconds() << " seconds");
+}
+
+RDFLoader::RDFLoader(const std::shared_ptr<rclcpp::Node>& node, const std::string& ros_name,
+                     bool default_continuous_value, double default_timeout)
+  : ros_name_(ros_name)
+  , nodeInterface_(std::make_shared<moveit::node_interface::NodeInterface>(moveit::node_interface::NodeInterface(node)))
+{
+  loadRobot(nodeInterface_, ros_name, default_continuous_value, default_timeout);
+}
+
+RDFLoader::RDFLoader(moveit::node_interface::NodeInterfaceSharedPtr& node_interface, const std::string& ros_name,
+                     bool default_continuous_value, double default_timeout)
+  : ros_name_(ros_name)
+{
+  loadRobot(node_interface, ros_name, default_continuous_value, default_timeout);
 }
 
 RDFLoader::RDFLoader(const std::string& urdf_string, const std::string& srdf_string)

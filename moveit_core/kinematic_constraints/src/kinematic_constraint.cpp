@@ -431,7 +431,7 @@ bool PositionConstraint::configure(const moveit_msgs::msg::PositionConstraint& p
 
   if (pc.weight <= std::numeric_limits<double>::epsilon())
   {
-    RCLCPP_WARN(LOGGER, "The weight on position constraint for link '%s' is near zero.  Setting to 1.0.",
+    RCLCPP_WARN(LOGGER, "The weight on orientation constraint for link '%s' is near zero.  Setting to 1.0.",
                 pc.link_name.c_str());
     constraint_weight_ = 1.0;
   }
@@ -606,7 +606,7 @@ bool OrientationConstraint::configure(const moveit_msgs::msg::OrientationConstra
 
   if (oc.weight <= std::numeric_limits<double>::epsilon())
   {
-    RCLCPP_WARN(LOGGER, "The weight on orientation constraint for link '%s' is near zero.  Setting to 1.0.",
+    RCLCPP_WARN(LOGGER, "The weight on position constraint for link '%s' is near zero.  Setting to 1.0.",
                 oc.link_name.c_str());
     constraint_weight_ = 1.0;
   }

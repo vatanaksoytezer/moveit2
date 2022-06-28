@@ -38,6 +38,7 @@
 
 #include <std_msgs/msg/string.hpp>
 #include <rclcpp/rclcpp.hpp>
+#include <moveit_node_interface/moveit_node_interface.hpp>
 
 namespace rdf_loader
 {
@@ -59,7 +60,7 @@ using StringCallback = std::function<void(const std::string&)>;
 class SynchronizedStringParameter
 {
 public:
-  std::string loadInitialValue(const std::shared_ptr<rclcpp::Node>& node, const std::string& name,
+  std::string loadInitialValue(moveit::node_interface::NodeInterfaceSharedPtr& node_interface, const std::string& name,
                                StringCallback parent_callback = {}, bool default_continuous_value = false,
                                double default_timeout = 10.0);
 
@@ -72,7 +73,7 @@ protected:
 
   void stringCallback(const std_msgs::msg::String::SharedPtr msg);
 
-  std::shared_ptr<rclcpp::Node> node_;
+  moveit::node_interface::NodeInterfaceSharedPtr node_interface_;
   std::string name_;
   StringCallback parent_callback_;
 

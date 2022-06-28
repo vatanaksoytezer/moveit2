@@ -10,6 +10,7 @@ find_package(moveit_msgs REQUIRED)
 # find_package(moveit_ros_perception REQUIRED)
 find_package(pluginlib REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(rclcpp_lifecycle REQUIRED)
 find_package(message_filters REQUIRED)
 find_package(srdfdom REQUIRED)
 find_package(urdf REQUIRED)
@@ -22,6 +23,7 @@ find_package(Eigen3 REQUIRED)
 find_package(moveit_core REQUIRED)
 find_package(ament_index_cpp REQUIRED)
 find_package(moveit_ros_occupancy_map_monitor REQUIRED)
+find_package(moveit_node_interface REQUIRED)
 
 # Finds Boost Components
 include(ConfigExtras.cmake)
@@ -56,6 +58,7 @@ set(THIS_PACKAGE_LIBRARIES
 set(THIS_PACKAGE_INCLUDE_DEPENDS
   pluginlib
   rclcpp
+  rclcpp_lifecycle
   message_filters
   srdfdom
   urdf
@@ -69,6 +72,7 @@ set(THIS_PACKAGE_INCLUDE_DEPENDS
   moveit_msgs
   tf2_msgs
   tf2_geometry_msgs
+  moveit_node_interface
 )
 
 include_directories(${THIS_PACKAGE_INCLUDE_DIRS})

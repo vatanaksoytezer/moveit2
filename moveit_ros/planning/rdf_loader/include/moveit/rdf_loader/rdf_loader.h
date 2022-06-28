@@ -41,6 +41,7 @@
 #include <urdf/model.h>
 #include <srdfdom/model.h>
 #include <rclcpp/rclcpp.hpp>
+#include <moveit_node_interface/moveit_node_interface.hpp>
 
 namespace rdf_loader
 {
@@ -71,6 +72,10 @@ public:
    */
   RDFLoader(const std::shared_ptr<rclcpp::Node>& node, const std::string& ros_name = "robot_description",
             bool default_continuous_value = false, double default_timeout = 10.0);
+
+  RDFLoader(moveit::node_interface::NodeInterfaceSharedPtr& node_interface,
+            const std::string& ros_name = "robot_description", bool default_continuous_value = false,
+            double default_timeout = 10.0);
 
   /** @brief Initialize the robot model from a string representation of the URDF and SRDF documents */
   RDFLoader(const std::string& urdf_string, const std::string& srdf_string);
@@ -122,6 +127,8 @@ private:
 
   void urdfUpdateCallback(const std::string& new_urdf_string);
   void srdfUpdateCallback(const std::string& new_srdf_string);
+  void loadRobot(moveit::node_interface::NodeInterfaceSharedPtr& node_interface, const std::string& ros_name,
+                 bool default_continuous_value, double default_timeout);
 
   NewModelCallback new_model_cb_;
 
@@ -133,5 +140,6 @@ private:
 
   srdf::ModelSharedPtr srdf_;
   urdf::ModelInterfaceSharedPtr urdf_;
+  moveit::node_interface::NodeInterfaceSharedPtr nodeInterface_;
 };
 }  // namespace rdf_loader
